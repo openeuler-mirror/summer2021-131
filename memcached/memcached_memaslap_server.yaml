@@ -1,0 +1,109 @@
+project: "memcached_memaslap"
+maxiterations: 2048
+startworkload: "systemctl start memcached.service"
+stopworkload: "systemctl stop memcached.service"
+object : 
+  -
+    name : "kernel.numa_balancing"
+    info :
+        desc : "Specifies whether to enable NUMA automatic balancing."
+        get : "sysctl -n kernel.numa_balancing"
+        set : "sysctl -w kernel.numa_balancing=$value"
+        needrestart : "false"
+        type : "discrete"
+        options :
+          - "0"
+          - "1"
+        dtype : "string"
+  -
+    name : "kernel.sched_autogroup_enabled"
+    info :
+        desc : "When enabled, the kernel creates task groups to optimize desktop program scheduling.
+0: disabled
+1: enabled"
+        get : "sysctl -n kernel.sched_autogroup_enabled"
+        set : "sysctl -w kernel.sched_autogroup_enabled=$value"
+        needrestart : "false"
+        type : "discrete"
+        options :
+          - "0"
+          - "1"
+        dtype : "string"
+  -
+    name : "kernel.sched_wakeup_granularity_ns"
+    info :
+        desc : "This variable indicates the base of the minimum time that a process should run after it is woken up. The smaller the base, the higher the probability of preemption."
+        get : "sysctl -n kernel.sched_wakeup_granularity_ns"
+        set : "sysctl -w kernel.sched_wakeup_granularity_ns=$value"
+        needrestart : "false"
+        type : "discrete"
+        scope :
+          - 1000000
+          - 100000000
+        step : 1000000
+        items : 
+        dtype : "int"
+  -
+    name : "kernel.sched_min_granularity_ns"
+    info :
+        desc : "Minimum running time of a process on the CPU. During this time, the kernel does not proactively select other processes for scheduling (in nanoseconds)."
+        get : "sysctl -n kernel.sched_min_granularity_ns"
+        set : "sysctl -w kernel.sched_min_granularity_ns=$value"
+        needrestart : "false"
+        type : "discrete"
+        scope :
+          - 1000000
+          - 100000000
+        step : 1000000
+        items : 
+        dtype : "int"
+  -
+    name : "net.mtu"
+    info :
+        desc : "Indicates the maximum transmission unit of the network,"
+        get : "ifconfig enp1s0 | grep mtu | awk '{print $4}'"
+        set : "ifconfig enp1s0 mtu $value"
+        needrestart : "false"
+        type : "discrete"
+        scope :
+          - 500
+          - 9000
+        step : 500
+        items : 
+        dtype : "int"
+  -
+    name : "net.generic-receive-offload"
+    info :
+        desc : "Whether reassembling small packets into larger ones"
+        get : ethtool -k enp1s0 | grep "generic-receive-offload" | awk '{print $2}'
+        set : "ethtool -K enp1s0 gro $value"
+        needrestart : "false"
+        type : "discrete"
+        options :
+          - "on"
+          - "off"
+        dtype : "string"
+  -
+    name : "net.generic-segmentation-offload"
+    info :
+        desc : "Whether reassembling small packets into larger ones"
+        get : ethtool -k enp1s0 | grep "generic-segmentation-offload" | awk '{print $2}'
+        set : "ethtool -K enp1s0 gso $value"
+        needrestart : "false"
+        type : "discrete"
+        options :
+          - "on"
+          - "off"
+        dtype : "string"
+  -
+    name : "net.tcp-segmentation-offload"
+    info :
+        desc : "Wheth allow a device to segment a single frame into multiple frames with a data payload size specified in skb_shinfo()->gso_size."
+        get : ethtool -k enp1s0 | grep "tcp-segmentation-offload" | awk '{print $2}'
+        set : "ethtool -K enp1s0 tso $value"
+        needrestart : "false"
+        type : "discrete"
+        options :
+          - "on"
+          - "off"
+        dtype : "string"
