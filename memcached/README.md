@@ -1,7 +1,5 @@
 Prepare the environment
-'''shell
 sh prepare.sh
-'''
 Start to tuning
 '''shell
 atune-adm tuning --project memcached_memaslap --detail memcached_memaslap_client.yaml
