@@ -13,4 +13,4 @@
 #
 # Create: 2021-08-08
 
-ssh -t root@11.0.0.14 "/usr/local/libmemcached/bin/memaslap -s 11.0.0.139:11211 -T 4 -c 768 -t 60s > memaslap_benchmark.log ; scp memaslap_benchmark.log root@11.0.0.139:/root/A-Tune/examples/tuning/memcached/"
+ssh -t root@11.0.0.14 "/usr/local/libmemcached/bin/memaslap -s 11.0.0.139:11211 -T 4 -c 768 -t 30s > memaslap_benchmark.log ; scp memaslap_benchmark.log root@11.0.0.139:/root/A-Tune/examples/tuning/memcached/"

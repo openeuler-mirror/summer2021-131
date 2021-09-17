@@ -1,15 +1,15 @@
 servers : 11.0.0.139:11211
 threads count: 4
 concurrency: 768
-run time: 60s
+run time: 30s
 windows size: 10k
 set proportion: set_prop=0.50
 get proportion: get_prop=0.50
-cmd_get: 3307323
-cmd_set: 3307716
+cmd_get: 788616
+cmd_set: 789034
 get_misses: 0
-written_bytes: 3886078275
-read_bytes: 3697170864
-object_bytes: 3598795008
+written_bytes: 926599300
+read_bytes: 881284188
+object_bytes: 858468992
 
-Run time: 60.0s Ops: 6615039 TPS: 110242 Net_rate: 120.5M/s
+Run time: 30.0s Ops: 1577650 TPS: 52584 Net_rate: 57.5M/s
