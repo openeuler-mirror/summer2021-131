@@ -1,6 +1,6 @@
 # Summer2021-No.131 为openEuler操作系统中安装的memcached应用进行性能调优
 
-[已并入A-tune主仓库](https://gitee.com/openeuler/A-Tune/tree/master/examples/tuning)
+[已并入A-tune主仓库](https://gitee.com/openeuler/A-Tune/tree/master/examples/tuning/memcached)
 
 #### 介绍
 https://gitee.com/openeuler-competition/summer-2021/issues/I3R6AC
